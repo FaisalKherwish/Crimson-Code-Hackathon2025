@@ -73,6 +73,12 @@ void deleteList(Node** pList)
 	*pList = NULL;
 }
 
+void printNode(Node* pCur)
+{
+	printf("Quality: %lf\n", pCur->data.quality);
+	printf("Type: %s", pCur->data.grouping);
+}
+
 double lookForGrouping(Node* pList)
 {
 	Node* pCur = pList;
