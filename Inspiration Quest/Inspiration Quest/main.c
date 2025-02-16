@@ -2,5 +2,12 @@
 
 int main(void)
 {
-	game();
+	int status = -1;
+
+	do
+	{
+		status = game();
+	} while (status != 0);
+	
+	printf("Thanks for playing, go discover your own inspirations!");
 }
