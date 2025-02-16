@@ -38,6 +38,9 @@ double lookForGrouping(Node* pList);
 double groupingValue(char* grouping, int maxCount, int size);
 double qualityCalculate(Node* pList);
 computeSale(double multiplier);
+void printMenu();
+void enviormentPicker();
+
 
 #endif
 
