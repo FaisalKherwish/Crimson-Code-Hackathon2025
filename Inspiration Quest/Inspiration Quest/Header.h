@@ -66,7 +66,7 @@ int computeSale(double multiplier);
 void printMenu();
 void enviormentPicker(Node** pList);
 void paint(Node** pList1, Node** pList2);
-int game();
+int game(int targetQuota);
 
 
 #endif
