@@ -52,15 +52,19 @@ typedef struct node
 
 Node* createNode(Inspiration newData);
 void insertInList(Node** pList, Inspiration newData);
+Node* gatherInspiration(Node** pList, char ss);
+int computeQuality();
 void transferData(Node** pList1, Node** pList2, Node* pMem);
 void deleteList(Node** pList);
 void printNode(Node* pCur);
 double lookForGrouping(Node* pList);
 double groupingValue(char* grouping, int maxCount, int size);
 double qualityCalculate(Node* pList);
-computeSale(double multiplier);
+int computeSale(double multiplier);
 void printMenu();
-void enviormentPicker();
+void enviormentPicker(Node** pList);
+void paint(Node** pList1, Node** pList2);
+int game();
 
 
 #endif
