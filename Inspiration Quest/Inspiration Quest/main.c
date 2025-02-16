@@ -1,13 +1,6 @@
-#include "Header.h
-int main (void)
+#include "Header.h"
+
+int main(void)
 {
-game();
-
-
-
-
-
-
-
-
+	game();
 }
