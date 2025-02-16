@@ -147,7 +147,6 @@ void transferData(Node** pList1, Node** pList2, Node* pMem)
 	}
 }
 
-
 void deleteList(Node** pList)
 {
 	Node* pCur = *pList;
@@ -186,6 +185,11 @@ double lookForGrouping(Node* pList)
 
 		for (int j = 0; j < size; j++)
 		{
+			if (pCur->data.grouping == NULL)
+			{
+				return (double)(size / 10) + qualityCalculate(pList) + 1;
+			}
+
 			if (pCur->pNext != NULL && strcmp(pCur->data.grouping, pCur->pNext->data.grouping) == 0)
 			{
 				count++;
