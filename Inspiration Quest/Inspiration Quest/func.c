@@ -254,7 +254,7 @@ void enviormentPicker(Node** pList)
 	int val = rand() % 4 + 1;
 	int playerChoice = 0, option = 0;
 
-	printf("Your Selected Environment for Today is...");
+	printf("Your Selected Environment for Today is...\n");
 	system("pause");
 	system("cls");
 
@@ -439,7 +439,6 @@ void paint(Node** pList1, Node** pList2)
 	{
 		printf("Your mind draws a blank, you dont feel inspired to draw at all.\n");
 		system("pause");
-		return;
 	}
 
 	while (pCur != NULL)
@@ -450,11 +449,18 @@ void paint(Node** pList1, Node** pList2)
 		size++;
 	}
 
+	pCur = *pList1;
+
 	do {
-		printf("Select inspiration you wish to paint onto the canvas (1-%d)\n", size);
-		printf("Selection must be valid\n");
-		scanf(" %d", &option);
+		if (pCur != NULL)
+		{
+			printf("Select inspiration you wish to paint onto the canvas (1-%d)\n", size);
+			printf("Selection must be valid\n");
+			scanf(" %d", &option);
+		}
+		
 	} while (option < 1 || option > size);
+
 	
 	pCur = *pList1;
 
@@ -464,20 +470,18 @@ void paint(Node** pList1, Node** pList2)
 	}
 
 	transferData(pList1, pList2, pCur);
+	
 
 }
 
-int game() 
+int game(int targetQuota) 
 {
 	Node* backPack = NULL;  // The player's backpack for storing inspiration.
 	Node* canvas = NULL; // painting list
 	Area currentArea = { 'F' }; // Start in the Forest environment, for example.
-	int quota = 100; // Target quota for the player's art sale.
+	int quota = targetQuota; // Target quota for the player's art sale.
 	double totalEarnings = 0.0, profit = 0.0;
 	int day = 5, option = 0, count = 0;
-
-	// Game introduction
-	printMenu();
 
 	while (day > 0) 
 	{
@@ -485,8 +489,8 @@ int game()
 		do
 		{
 			printf("Day %d\n", day);
-			printf("Target Quota: %d\n", quota);
-			printf("Current Earnings: %.2lf\n", totalEarnings);
+			printf("Target Rent: $%d\n", quota);
+			printf("Current Earnings: $%.2lf\n", totalEarnings);
 
 			if (day == 1)
 			{
