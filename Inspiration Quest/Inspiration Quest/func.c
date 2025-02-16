@@ -435,3 +435,16 @@ void game() {
 	printf("Congratulations! You've reached your quota of %.2lf and won the game!\n", quota);
 	deleteList(&backPack);
 }
+
+
+void deleteList(Node** pList)
+{
+	Node* pCur = *pList;
+	Node* pNext = NULL;
+	while (pCur != NULL) {
+		pNext = pCur->pNext;
+		free(pCur);
+		pCur = pNext;
+	}
+	*pList = NULL;
+}
