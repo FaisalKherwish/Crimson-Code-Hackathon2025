@@ -173,6 +173,7 @@ double lookForGrouping(Node* pList)
 	while (pCur != NULL)
 	{
 		size++;
+		pCur = pCur->pNext;
 	}
 
 	int count = 0, maxCount = 0;
@@ -181,6 +182,7 @@ double lookForGrouping(Node* pList)
 	for (int i = 0; i < size; i++)
 	{
 		count = 0;
+		pCur = pList;
 
 		for (int j = 0; j < size; j++)
 		{
@@ -261,7 +263,7 @@ void enviormentPicker(Node** pList)
 	{
 	case 1:
 
-		printf("the Forest!");
+		printf("the Forest!\n");
 		system("pause");
 		system("cls");
 
@@ -387,7 +389,7 @@ void enviormentPicker(Node** pList)
 		break;
 	case 4:
 
-		printf("the Club!");
+		printf("the Club!\n");
 		system("pause");
 		system("cls");
 
@@ -512,17 +514,21 @@ int game()
 						printf("Continue to recall?\n");
 						printf("(1)Yes\n(2)Stop and Paint\n");
 						scanf(" %d", &option);
-						if (count == 3 && option == 1) printf("Your mind fogs, better paint before this inspiration is forgotten\n");
+						if (count == 3 && option == 1)
+						{
+							printf("Your mind fogs, you feel that it's better to start now before you lose this creative burst\n");
+							break;
+						}
 					} while (option < 3 && option > 0 && option != 2 && count <= 3);
 
 					profit = computeSale((double)lookForGrouping(canvas));
-					printf("Current Cash: %d", totalEarnings);
+					printf("Current Cash: %d\n", totalEarnings);
 					totalEarnings += profit;
 					if (totalEarnings > 30) printf("What a great painting! You set it up for sale\n");
 					else if (totalEarnings > 20) printf("You are proud of what you've made You set it up for sale\n");
 					else printf("It may not be your best work. You set it up for sale\n");
 					system("pause");
-					printf("Sold! You earned: %lf", profit);
+					printf("Sold! You earned: %.2lf\n", profit);
 					deleteList(&canvas);
 				}
 				else break;
