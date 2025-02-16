@@ -1,5 +1,66 @@
 #include "Header.h
+Node* gatherInspiration(Attributes backPack[], Area ss) {
+	srand(time(NULL)); // Seed the random number generator
+	int random = rand() % 9 + 1; // Random number between 1 and 9
+	Inspiration newInspiration = { 0 }; // Initialize all attributes to 0
 
+	// Determine the type of inspiration based on the environment and random event
+	if (ss.envrionment == 'C') { // Club environment
+		if (random > 3) {
+			newInspiration.entertainment = 1; 
+		}
+		else if (random == 2) {
+			newInspiration.tech = 1; // Tech inspiration
+		}
+		else if (random == 1) {
+			newInspiration.ethos = 1; // Ethos inspiration
+		}
+	}
+	else if (ss.envrionment == 'F') { // Forest environment
+		if (random > 5) {
+			newInspiration.nature = 1;
+		}
+		else if (random == 3) {
+			newInspiration.ethos = 1; // Ethos inspiration
+		}
+	}
+	else if (ss.envrionment == 'O') { // Outskirts environment
+		if (random > 4) {
+			newInspiration.dailyLife = 1; // Daily life inspiration
+		}
+		else if (random == 2) {
+			newInspiration.community = 1; // Community inspiration
+		}
+	}
+	else if (ss.envrionment == 'D') { // Downtown environment
+		if (random > 3) {
+			newInspiration.entertainment = 1; // Entertainment inspiration
+		}
+		else if (random == 2) {
+			newInspiration.tech = 1; // Tech inspiration
+		}
+	}
+	newInspiration.quality = computeQuality();
+	
+
+	// Create a new node with the generated inspiration
+	Node* newNode = createNode(newInspiration);
+	if (newNode == NULL) {
+		printf("Failed to create a new node.\n");
+		return NULL;
+	}
+
+	// Insert the new node into the backpack (assuming backPack is a linked list)
+	insertInList((Node**)&backPack, newInspiration);
+
+	return newNode;
+}
+int computeQuality()
+{
+	int random = ran();
+	random = random % 5 + 1;
+	return random;
+}
 Node* createNode(Inspiration newData)
 {
 	Node* pMem = malloc(sizeof(Node));
