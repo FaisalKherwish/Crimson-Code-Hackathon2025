@@ -399,3 +399,61 @@ void enviormentPicker()
 		break;
 	}
 }
+
+void game() {
+	Node* backPack = NULL;  // The player's backpack for storing inspiration.
+	Area currentArea = { 'F' }; // Start in the Forest environment, for example.
+	int quota = 100; // Target quota for the player's art sale.
+	double totalEarnings = 0.0;
+	int day = 1;
+
+	// Game introduction
+	printMenu();
+
+	while (totalEarnings < quota) {
+		printf("Day %d\n", day);
+		printf("Target Quota: %d\n", quota);
+		printf("Current Earnings: %.2lf\n", totalEarnings);
+
+		// Pick the environment for the day
+		enviormentPicker();
+
+		// Gather inspiration based on environment
+		Node* inspiration = gatherInspiration(backPack, currentArea);
+		if (inspiration != NULL) {
+			// After gathering inspiration, calculate the value of the grouped inspirations
+			double groupValue = lookForGrouping(backPack);
+
+			// Compute the quality of the inspiration gathered
+			double qualityValue = qualityCalculate(backPack);
+
+			// Add the grouped value and the quality value to the total earnings
+			totalEarnings += groupValue + qualityValue;
+
+			printf("Earnings after inspiration: %.2lf\n", totalEarnings);
+		}
+		else {
+			printf("No inspiration gathered today.\n");
+		}
+
+		// Ask player if they want to sell their art
+		char choice;
+		printf("Would you like to sell your art? (y/n): ");
+		scanf(" %c", &choice);
+		if (choice == 'y' || choice == 'Y') {
+			double salePrice = computeSale(1.0); // Here we assume multiplier is 1.0 for simplicity
+			totalEarnings += salePrice;
+			printf("You sold your art for %.2lf!\n", salePrice);
+		}
+
+		// End of day
+		printf("\n--- End of Day %d ---\n", day);
+		day++;
+		system("pause");
+		system("cls");
+	}
+
+	// Player wins if they have enough earnings
+	printf("Congratulations! You've reached your quota of %.2lf and won the game!\n", quota);
+	deleteList(&backPack);
+}
