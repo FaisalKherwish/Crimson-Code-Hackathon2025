@@ -245,10 +245,10 @@ double qualityCalculate(Node* pList)
 
 void printMenu()
 {
-	printf("Welcom To an Inspiration Quest\n\n");
-	printf("Within this game, you will embark on a interactive adventure in which you traverse numerous enviorments\n");
-	printf("in hopes to find inspiration and eventually create an artpiece that the user will sell for gold\n");
-	printf("to hopefully reach the quota for the day!\n");
+	printf("Welcom to The Artist\n\n");
+	printf("Within this game, you will embark on a interactive adventure in which you traverse numerous environments\n");
+	printf("in hopes to find inspiration and eventually create a masterpiece worth its weight.\n");
+	printf("You will need to reach a quota for the day to continue your career. Good luck artist.\n");
 	system("pause");
 	system("cls");
 }
