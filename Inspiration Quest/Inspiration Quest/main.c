@@ -2,6 +2,7 @@
 
 int main(void)
 {
+	srand(time(NULL));
 	int status = -1;
 
 	do
@@ -9,28 +10,5 @@ int main(void)
 		status = game();
 	} while (status != 0);
 	
-	printf("Thanks for playing, go discover your own inspirations!");
-}
-
-
-
-
-
-
-
-
-
-
-#include "fuk.h"
-
-int main(void)
-{
-	int status = -1;
-
-	do
-	{
-		status = game();
-	} while (status != 0);
-
 	printf("Thanks for playing, go discover your own inspirations!");
 }
