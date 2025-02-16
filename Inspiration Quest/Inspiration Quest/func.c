@@ -1,61 +1,72 @@
 #include "Header.h"
 
-Node* gatherInspiration(Attributes backPack[], Area ss) {
+Node* gatherInspiration(Node** pList, char ss) 
+{
 	srand(time(NULL)); // Seed the random number generator
 	int random = rand() % 9 + 1; // Random number between 1 and 9
 	Inspiration newInspiration = { 0 }; // Initialize all attributes to 0
 
 	// Determine the type of inspiration based on the environment and random event
-	if (ss.envrionment == 'C') { // Club environment
+	if (ss == 'C') { // Club environment
 		if (random > 3) {
 			newInspiration.attributes.entertainment = 1;
+			strcpy(newInspiration.grouping,"Entertainment");
 		}
 		else if (random == 2) {
 			newInspiration.attributes.tech = 1; // Tech inspiration
+			strcpy(newInspiration.grouping,"Technology");
 		}
 		else if (random == 1) {
 			newInspiration.attributes.ethos = 1; // Ethos inspiration
+			strcpy(newInspiration.grouping,"Ethos");
 		}
 	}
-	else if (ss.envrionment == 'F') { // Forest environment
+	else if (ss == 'F') { // Forest environment
 		if (random > 5) {
 			newInspiration.attributes.nature = 1;
+			strcpy(newInspiration.grouping,"Nature");
 		}
 		else if (random == 3) {
 			newInspiration.attributes.ethos = 1; // Ethos inspiration
+			strcpy(newInspiration.grouping,"Ethos");
 		}
 	}
-	else if (ss.envrionment == 'O') { // Outskirts environment
+	else if (ss == 'O') { // Outskirts environment
 		if (random > 4) {
 			newInspiration.attributes.dailyLife = 1; // Daily life inspiration
+			strcpy(newInspiration.grouping,"Daily Life");
 		}
 		else if (random == 2) {
 			newInspiration.attributes.community = 1; // Community inspiration
+			strcpy(newInspiration.grouping,"Community");
 		}
 	}
-	else if (ss.envrionment == 'D') { // Downtown environment
+	else if (ss == 'D') { // Downtown environment
 		if (random > 3) {
 			newInspiration.attributes.entertainment = 1; // Entertainment inspiration
+			strcpy(newInspiration.grouping,"Entertainment");
 		}
 		else if (random == 2) {
 			newInspiration.attributes.tech = 1; // Tech inspiration
+			strcpy(newInspiration.grouping,"Technology");
 		}
 	}
-	newInspiration.quality = computeQuality();
 
+	newInspiration.quality = computeQuality();
 
 	// Create a new node with the generated inspiration
 	Node* newNode = createNode(newInspiration);
+
 	if (newNode == NULL) {
 		printf("Failed to create a new node.\n");
 		return NULL;
 	}
-
 	// Insert the new node into the backpack (assuming backPack is a linked list)
-	insertInList((Node**)&backPack, newInspiration);
+	insertInList(pList, newInspiration);
 
 	return newNode;
 }
+
 int computeQuality()
 {
 	int random = rand();
@@ -72,6 +83,7 @@ int computeSale(double multiplier)
 	sale = random * multiplier;
 	return sale;
 }
+
 Node* createNode(Inspiration newData)
 {
 	Node* pMem = malloc(sizeof(Node));
@@ -129,22 +141,13 @@ void transferData(Node** pList1, Node** pList2, Node* pMem)
 
 void deleteList(Node** pList)
 {
-	Node* pCur = *pList, * pPrev = NULL;
-
-	while (pCur->pNext != NULL)
-	{
-		pCur = pCur->pNext;
-		pPrev = pCur;
-	}
-
-	while (pCur != pList)
-	{
+	Node* pCur = *pList;
+	Node* pNext = NULL;
+	while (pCur != NULL) {
+		pNext = pCur->pNext;
 		free(pCur);
-		pCur = pPrev;
-		pPrev = pPrev->pPrev;
+		pCur = pNext;
 	}
-
-	free(pCur);
 	*pList = NULL;
 }
 
@@ -235,14 +238,13 @@ void printMenu()
 	system("cls");
 }
 
-
-void enviormentPicker()
+void enviormentPicker(Node** pList)
 {
 	srand(time(NULL));
 	int val = rand() % 4 + 1;
-	int playerChoice = 0;
+	int playerChoice = 0, option = 0;
 
-	printf("Your Selected Enviorment for Today is...");
+	printf("Your Selected Environment for Today is...");
 	system("pause");
 	system("cls");
 
@@ -250,7 +252,6 @@ void enviormentPicker()
 	switch (val)
 	{
 	case 1:
-
 
 		printf("the Forest!");
 		system("pause");
@@ -261,27 +262,33 @@ void enviormentPicker()
 		switch (playerChoice)
 		{
 		case 1:
-			printf("While you follow a trail through a nice lush forset, ");
-			printf("you spot a family of bunnies gathering plants and berries to eat and the baby bunny appears to be injured."); //+Nature Inspo
-			printf("\n\nDo you help it? (Type the represented integer)\n");
-			printf("1.Yes\n"); //Yes they get ethos inspo
-			printf("2.N0\n"); // They don't get it
+			printf("While you follow a trail through a nice lush forest,\n");
+			printf("you spot a family of bunnies gathering plants and berries. The baby bunny appears to be injured.\n"); //+Nature Inspo
+			printf("What do you do? (Type the represented integer)\n");
+			printf("1.Help it\n");
+			printf("2.Leave it\n");
+			scanf(" %d", &option);
+			gatherInspiration(&pList, 'F');
 			break;
 		case 2:
-			printf("You see a nice bush of exotic flowers and decide to take a nice sniff");
-			printf("\nAs you exhale, your face seems to be very satisfied\n"); // +nature inspo
+			printf("You see a nice bush of exotic flowers and decide to take a nice sniff\n");
+			printf("As you exhale, your face seems to be very satisfied\n"); 
+			gatherInspiration(&pList, 'F');
 			break;
 		case 3:
 			printf("You see two big ferocious brown bears fighting for a cave to call home.\n");
-			printf("This ferocious ignited a spark within your heart"); // Plus inspo
+			printf("This ferocious ignited a spark within your heart\n"); 
+			gatherInspiration(&pList, 'F');
 			break;
 		case 4:
 			printf("About an hour into the hike, you stumble upon a nice lake encapsulated in a field of serenity.\n");
-			printf("You feel extremely peacful and your heart is content\n");//Plus ethos
+			printf("You feel extremely peacful and your heart is content\n");
+			gatherInspiration(&pList, 'F');
 			break;
 		case 5:
 			printf("You hear a beautiful chirping sound only to look up and see\n");
-			printf("two birds singing to one another.\n"); //Plus Inspo
+			printf("two birds singing to one another.\n"); 
+			gatherInspiration(&pList, 'F');
 			break;
 		}
 
@@ -300,30 +307,35 @@ void enviormentPicker()
 		{
 
 		case 1:
-			printf("As you pass through a farm, you see a sheep that has toppeled over and can't get up\n");
-			printf("because it's too heavy.\n");
+			printf("As you pass through a farm, you see a sheep that has toppled over and can't get up because it's too heavy.\n");
 			printf("Do you help it?\n");
-			printf("1.Yes\n"); //THey get the inspiration for community
-			printf("2.No\n"); // They get nothing
+			printf("1.Yes\n"); 
+			printf("2.No\n"); 
+			scanf(" %d", &option);
+			gatherInspiration(&pList, 'O');
 			break;
 		case 2:
 			printf("As you take a tour of a farm, you smell a very foul stench...only to realize it's cow poop.\nYou feel sorry for the farmers that have to smell it every day\n");//+Daily Life
+			gatherInspiration(&pList, 'O');
 			break;
 		case 3:
-			printf("On a tour of a farm, the farmer asks if you want to milk a cow.");
-			printf("You ablige and proceed to milk a cow.\n");
-			printf("You feel invigorated\n"); //+DL
+			printf("On a tour of a farm, the farmer asks if you want to milk a cow.\n");
+			printf("You oblige and proceed to milk a cow.\n");
+			printf("You feel invigorated\n"); 
+			gatherInspiration(&pList, 'O');
 			break;
 		case 4:
 			printf("When on a tour of a farm, the farmer lets you know\n");
 			printf("that one of his duties is to neuter the animals.\n");
-			printf("You feel blessed that you never wanted to work on a farm.\n"); //+DL
+			printf("You feel blessed that you never wanted to work on a farm.\n"); 
+			gatherInspiration(&pList, 'O');
 			break;
 
 		case 5:
 			printf("On the tour of a farm, A PIG ESCAPES FROM ITS PEN\n");
 			printf("And the farmer gives you the task to chase it and bring it back because he's too old\n");
-			printf("You run arorund for what feels like forever (like 5 minutes)\n"); //+entertainment inspo
+			printf("You run around for what feels like forever (like 5 minutes)\n"); 
+			gatherInspiration(&pList, 'O');
 			break;
 		}
 
@@ -340,22 +352,26 @@ void enviormentPicker()
 		{
 
 		case 1:
-			printf("As you walk down a block, you peer into an alley way and see 3 homeless people fighting over a hunnybun.\n");
-			printf("You feel blessed that you escaped poverty and homelessness\n");//+entertainment inspo
+			printf("As you walk down a block, you peer into an alley way and see 3 homeless people fighting over a honeybun.\n");
+			printf("You feel blessed that you escaped poverty and homelessness\n");
+			gatherInspiration(&pList, 'D');
 			break;
 		case 2:
-			printf("You enter into a gas station too grab a quick snack ");
+			printf("You enter into a gas station too grab a quick snack \n");
 			printf("only to have walked into a misfortunate scenario of the store owner getting robbed.\n");
-			printf("In the moment you feel scared but after its over you feel relieved...\n");//+DL
+			printf("In the moment you feel scared but after its over you feel relieved...\n");
+			gatherInspiration(&pList, 'D');
 			break;
 		case 3:
-			printf("You take the subway to get to a different part of a the city your are in, ");
+			printf("You take the subway to get to a different part of a the city your are in, \n");
 			printf("only too see a group of people jumping over the turnstile to avoid paying for a metro pass.\n");
-			printf("You think to yourself,'What terrible design'\n"); //+Tech inspo
+			printf("You think to yourself,'What terrible design'\n"); 
+			gatherInspiration(&pList, 'D');
 			break;
 		case 4:
 			printf("You walk through a nice park that you saw while walking around the city.\n");
-			printf("You see multiple drunk men doing absurd things that can't be named...\n");//+ent
+			printf("You see multiple drunk men doing absurd things that can't be named...\n");
+			gatherInspiration(&pList, 'D');
 			break;
 		}
 		system("pause");
@@ -376,75 +392,142 @@ void enviormentPicker()
 		case 1:
 			printf("You arrive at a well known club in the city you reside in.\n");
 			printf("The vibes are perfect and all you wanna do is dance.\n");
-			printf("So, you dance until the sun comes up\n");//+Ent
+			printf("So, you dance until the sun comes up\n");
+			gatherInspiration(&pList, 'C');
 			break;
 		case 2:
 			printf("At the club, you can feel the music shaking the ground.\n");
-			printf("And no it's not the 5 tequila shots you just had (You Think)\n");//+Tech
+			printf("And no it's not the 5 tequila shots you just had (You Think)\n");
+			gatherInspiration(&pList, 'C');
 			break;
 		case 3:
 			printf("You see a pretty lady at the bar and buy her a drink from a different table.\n");
 			printf("Her boyfriend takes the drinks and mouths 'Cheers' to you.\n");
-			printf("You wanna go home but don't wanna look like a softie.\n"); //+Ethos
+			printf("You wanna go home but don't wanna look like a softie.\n");
+			gatherInspiration(&pList, 'C');
 			break;
 		case 4:
 			printf("It's late at night and a slow song comes on for whatever reason,\n");
 			printf("Then you realize today is Valentine's Day!\n");
-			printf("You and the rest of the single people in the club shine your flashlights in unison to give a nice ambiance to the dancers.\n"); //+Tech
+			printf("You and the rest of the single people in the club shine your flashlights in unison to give a nice ambiance to the dancers.\n");
+			gatherInspiration(&pList, 'C');
 			break;
 
 		}
 		system("pause");
 		system("cls");
-
 		break;
 	}
 }
 
-void game() {
+void paint(Node** pList1, Node** pList2)
+{
+	Node* pCur = *pList1;
+	int option = 0, size = 0;
+
+	while (pCur != NULL)
+	{
+		printf("Inspiration: %d", size + 1);
+		printNode(pCur);
+		pCur = pCur->pNext;
+		size++;
+	}
+
+	do {
+		printf("Select inspiration you wish to paint onto the canvas (1-%d)\n", size + 1);
+		printf("Selection must be valid\n");
+		scanf(" %d", &option);
+	} while (option > 1 && option < size + 1);
+	
+	pCur = *pList1;
+
+	for (int i = 0; i < option - 1; i++)
+	{
+		pCur = pCur->pNext;
+	}
+
+	transferData(pList1, pList2, pCur);
+
+}
+
+int game() 
+{
 	Node* backPack = NULL;  // The player's backpack for storing inspiration.
+	Node* canvas = NULL; // painting list
 	Area currentArea = { 'F' }; // Start in the Forest environment, for example.
 	int quota = 100; // Target quota for the player's art sale.
-	double totalEarnings = 0.0;
-	int day = 1;
+	double totalEarnings = 0.0, profit = 0.0;
+	int day = 1, option = 0, count = 0;
 
 	// Game introduction
 	printMenu();
 
-	while (totalEarnings < quota) {
+	while (day > 0) 
+	{
 		printf("Day %d\n", day);
 		printf("Target Quota: %d\n", quota);
 		printf("Current Earnings: %.2lf\n", totalEarnings);
 
 		// Pick the environment for the day
-		enviormentPicker();
+		do
+		{
+			printf("What do you do?\n");
+			printf("(1) Head Out\n(2) Paint and Sell\n(3) Quit\n");
+			scanf(" %d", &option);
 
-		// Gather inspiration based on environment
-		Node* inspiration = gatherInspiration(backPack, currentArea);
-		
+			switch (option)
+			{
+			case 1: enviormentPicker(&backPack);
+				day--;
+				break;
+			case 2: printf("You lift your brush and ready your canvas.\n");
+				printf("(1)Recall your memories\n(2)Stop\n");
+				scanf(" %d", &option);
+				if (option == 1)
+				{
+					do
+					{
+						paint(&backPack, &canvas);
+						count++;
+						printf("Continue to recall?\n");
+						printf("(1)Yes\n(2)Stop and Paint\n");
+						scanf(" %d", &option);
+						if (count == 3 && option == 1) printf("Your mind fogs, better paint before this inspiration is forgotten\n");
+					} while (option < 3 && option > 0 && option != 2 && count <= 3);
 
+					profit = computeSale((double)lookForGrouping(canvas));
+					printf("Current Cash: %d", totalEarnings);
+					totalEarnings += profit;
+					if (totalEarnings > 30) printf("What a great painting! You set it up for sale\n");
+					else if (totalEarnings > 20) printf("You are proud of what you've made You set it up for sale\n");
+					else printf("It may not be your best work. You set it up for sale\n");
+					system("pause");
+					printf("Sold! You earned: %lf", profit);
+					deleteList(&canvas);
+				}
+				break;
+			case 3: return 0;
+			}
 
-		// End of day
-		printf("\n--- End of Day %d ---\n", day);
-		day++;
-		system("pause");
-		system("cls");
+		} while (option != 3);
+
+		if (day == 1)
+		{
+			printf("Last day to gather money for rent.\nNo Pressure.");
+		}
 	}
 
-	// Player wins if they have enough earnings
-	printf("Congratulations! You've reached your quota of %.2lf and won the game!\n", quota);
-	deleteList(&backPack);
-}
 
 
-void deleteList(Node** pList)
-{
-	Node* pCur = *pList;
-	Node* pNext = NULL;
-	while (pCur != NULL) {
-		pNext = pCur->pNext;
-		free(pCur);
-		pCur = pNext;
+	if (totalEarnings > quota)
+	{
+		printf("Congrats, you've paid your dues on time.\nPrepare for the next month\n");
+		return 1;
 	}
-	*pList = NULL;
+	else
+	{
+		printf("Life wasn't the best to you, but at least you did what you loved.\n GAME OVER\n");
+		return 0;
+	}
+
 }
