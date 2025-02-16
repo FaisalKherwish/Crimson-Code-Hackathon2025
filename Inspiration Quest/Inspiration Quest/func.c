@@ -103,21 +103,24 @@ void insertInList(Node** pList, Inspiration newData)
 	}
 }
 
-void transferData(Node** pList, Node* pMem)
+void transferData(Node**pList1, Node** pList2, Node* pMem)
 {
-	Node* pCur = *pList;
+	Node* pCur = *pList1, *pCur2 = *pList2;
 
 	if (pMem != NULL)
 	{
-		if (pCur == NULL)
+		pCur->pPrev->pNext = pCur->pNext;
+		pCur->pNext->pPrev = pCur->pPrev;
+
+		if (pCur2 == NULL)
 		{
-			*pList = pMem;
+			*pList2 = pMem;
 		}
 		else
 		{
 			pMem->pNext = pCur;
 			pCur->pPrev = pMem;
-			*pList = pMem;
+			*pList2 = pMem;
 		}
 	}
 }
