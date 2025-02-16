@@ -29,6 +29,7 @@ typedef struct node
 	struct node* pPrev;
 }Node;
 
+computeSale(double multiplier);
 Node* createNode(Inspiration newData);
 void insertInList(Node** pList, Inspiration newData);
 void transferData(Node** pList, Node* pMem);
