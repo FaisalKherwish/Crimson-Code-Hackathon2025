@@ -152,3 +152,179 @@ double qualityCalculate(Node* pList)
 
 	return qualityValue;
 }
+
+void printMenu()
+{
+	printf("Welcom To an Inspiration Quest\n\n");
+	printf("Within this game, you will embark on a interactive adventure in which you traverse numerous enviorments\n");
+	printf("in hopes to find inspiration and eventually create an artpiece that the user will sell for gold\n");
+	printf("to hopefully reach the quota for the day!\n");
+	system("pause");
+	system("cls");
+}
+
+
+void enviormentPicker()
+{
+	srand(time(NULL));
+	int val = rand() % 4 + 1;
+	int playerChoice = 0;
+
+	printf("Your Selected Enviorment for Today is...");
+	system("pause");
+	system("cls");
+
+
+	switch (val)
+	{
+	case 1:
+
+
+		printf("the Forest!");
+		system("pause");
+		system("cls");
+
+		playerChoice = rand() % 5 + 1;
+
+		switch (playerChoice)
+		{
+		case 1:
+			printf("While you follow a trail through a nice lush forset, ");
+			printf("you spot a family of bunnies gathering plants and berries to eat and the baby bunny appears to be injured."); //+Nature Inspo
+			printf("\n\nDo you help it? (Type the represented integer)\n");
+			printf("1.Yes\n"); //Yes they get ethos inspo
+			printf("2.N0\n"); // They don't get it
+			break;
+		case 2:
+			printf("You see a nice bush of exotic flowers and decide to take a nice sniff");
+			printf("\nAs you exhale, your face seems to be very satisfied\n"); // +nature inspo
+			break;
+		case 3:
+			printf("You see two big ferocious brown bears fighting for a cave to call home.\n");
+			printf("This ferocious ignited a spark within your heart"); // Plus inspo
+			break;
+		case 4: 
+			printf("About an hour into the hike, you stumble upon a nice lake encapsulated in a field of serenity.\n");
+			printf("You feel extremely peacful and your heart is content\n");//Plus ethos
+			break;
+		case 5:
+			printf("You hear a beautiful chirping sound only to look up and see\n");
+			printf("two birds singing to one another.\n"); //Plus Inspo
+			break;
+		}
+
+		system("pause");
+		system("cls");
+
+		break;
+	case 2:
+
+		printf("the Outskirts!\n");
+		system("pause");
+		system("cls");
+		playerChoice = rand() % 5 + 1;
+
+		switch (playerChoice)
+		{
+
+		case 1:
+			printf("As you pass through a farm, you see a sheep that has toppeled over and can't get up\n");
+			printf("because it's too heavy.\n");
+			printf("Do you help it?\n");
+			printf("1.Yes\n"); //THey get the inspiration for community
+			printf("2.No\n"); // They get nothing
+			break;
+		case 2:
+			printf("As you take a tour of a farm, you smell a very foul stench...only to realize it's cow poop.\nYou feel sorry for the farmers that have to smell it every day\n");//+Daily Life
+			break;
+		case 3:
+			printf("On a tour of a farm, the farmer asks if you want to milk a cow.");
+			printf("You ablige and proceed to milk a cow.\n");
+			printf("You feel invigorated\n"); //+DL
+			break;
+		case 4:
+			printf("When on a tour of a farm, the farmer lets you know\n");
+			printf("that one of his duties is to neuter the animals.\n");
+			printf("You feel blessed that you never wanted to work on a farm.\n"); //+DL
+			break;
+
+		case 5:
+			printf("On the tour of a farm, A PIG ESCAPES FROM ITS PEN\n");
+			printf("And the farmer gives you the task to chase it and bring it back because he's too old\n");
+			printf("You run arorund for what feels like forever (like 5 minutes)\n"); //+entertainment inspo
+			break;
+		}
+
+		system("pause");
+		system("cls");
+		break;
+	case 3:
+		printf("the Downtown Area!\n");
+		system("pause");
+		system("cls");
+		playerChoice = rand() % 4 + 1;
+
+		switch (playerChoice)
+		{
+
+		case 1:
+			printf("As you walk down a block, you peer into an alley way and see 3 homeless people fighting over a hunnybun.\n");
+			printf("You feel blessed that you escaped poverty and homelessness\n");//+entertainment inspo
+			break;
+		case 2:
+			printf("You enter into a gas station too grab a quick snack ");
+			printf("only to have walked into a misfortunate scenario of the store owner getting robbed.\n");
+			printf("In the moment you feel scared but after its over you feel relieved...\n");//+DL
+			break;
+		case 3:
+			printf("You take the subway to get to a different part of a the city your are in, ");
+			printf("only too see a group of people jumping over the turnstile to avoid paying for a metro pass.\n");
+			printf("You think to yourself,'What terrible design'\n"); //+Tech inspo
+			break;
+		case 4:
+			printf("You walk through a nice park that you saw while walking around the city.\n");
+			printf("You see multiple drunk men doing absurd things that can't be named...\n");//+ent
+			break;
+		}
+		system("pause");
+		system("cls");
+		break;
+	case 4:
+
+		printf("the Club!");
+		system("pause");
+		system("cls");
+
+
+		playerChoice = rand() % 4 + 1;
+
+		switch (playerChoice)
+		{
+
+		case 1:
+			printf("You arrive at a well known club in the city you reside in.\n");
+			printf("The vibes are perfect and all you wanna do is dance.\n");
+			printf("So, you dance until the sun comes up\n");//+Ent
+			break;
+		case 2:
+			printf("At the club, you can feel the music shaking the ground.\n");
+			printf("And no it's not the 5 tequila shots you just had (You Think)\n");//+Tech
+			break;
+		case 3:
+			printf("You see a pretty lady at the bar and buy her a drink from a different table.\n");
+			printf("Her boyfriend takes the drinks and mouths 'Cheers' to you.\n");
+			printf("You wanna go home but don't wanna look like a softie.\n"); //+Ethos
+			break;
+		case 4:
+			printf("It's late at night and a slow song comes on for whatever reason,\n");
+			printf("Then you realize today is Valentine's Day!\n");
+			printf("You and the rest of the single people in the club shine your flashlights in unison to give a nice ambiance to the dancers.\n"); //+Tech
+			break;
+
+		}
+		system("pause");
+		system("cls");
+
+		break;
+	}
+}
