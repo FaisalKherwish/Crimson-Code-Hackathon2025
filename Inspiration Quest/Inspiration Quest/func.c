@@ -502,11 +502,12 @@ int game()
 					printf("Sold! You earned: %lf", profit);
 					deleteList(&canvas);
 				}
+				else break;
 				break;
 			case 3: return 0;
 			}
 
-		} while (option != 3);
+		} while (option != 3 && day > 0);
 
 		if (day == 1)
 		{
