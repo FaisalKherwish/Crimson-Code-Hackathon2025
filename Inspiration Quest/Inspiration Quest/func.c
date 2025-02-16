@@ -162,7 +162,7 @@ void deleteList(Node** pList)
 
 void printNode(Node* pCur)
 {
-	printf("Quality: %lf\n", pCur->data.quality);
+	printf("Quality: %d\n", pCur->data.quality);
 	printf("Type: %s\n", pCur->data.grouping);
 }
 
@@ -528,7 +528,7 @@ int game()
 					else if (totalEarnings > 20) printf("You are proud of what you've made You set it up for sale\n");
 					else printf("It may not be your best work. You set it up for sale\n");
 					system("pause");
-					printf("Sold! You earned: %.2lf\n", profit);
+					printf("Sold! You earned: $%.2lf\n", profit);
 					deleteList(&canvas);
 				}
 				else break;
