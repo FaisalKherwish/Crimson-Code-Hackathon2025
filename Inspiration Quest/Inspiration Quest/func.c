@@ -1,4 +1,5 @@
-#include "Header.h
+#include "Header.h"
+
 Node* gatherInspiration(Attributes backPack[], Area ss) {
 	srand(time(NULL)); // Seed the random number generator
 	int random = rand() % 9 + 1; // Random number between 1 and 9
@@ -7,41 +8,41 @@ Node* gatherInspiration(Attributes backPack[], Area ss) {
 	// Determine the type of inspiration based on the environment and random event
 	if (ss.envrionment == 'C') { // Club environment
 		if (random > 3) {
-			newInspiration.entertainment = 1; 
+			newInspiration.attributes.entertainment = 1;
 		}
 		else if (random == 2) {
-			newInspiration.tech = 1; // Tech inspiration
+			newInspiration.attributes.tech = 1; // Tech inspiration
 		}
 		else if (random == 1) {
-			newInspiration.ethos = 1; // Ethos inspiration
+			newInspiration.attributes.ethos = 1; // Ethos inspiration
 		}
 	}
 	else if (ss.envrionment == 'F') { // Forest environment
 		if (random > 5) {
-			newInspiration.nature = 1;
+			newInspiration.attributes.nature = 1;
 		}
 		else if (random == 3) {
-			newInspiration.ethos = 1; // Ethos inspiration
+			newInspiration.attributes.ethos = 1; // Ethos inspiration
 		}
 	}
 	else if (ss.envrionment == 'O') { // Outskirts environment
 		if (random > 4) {
-			newInspiration.dailyLife = 1; // Daily life inspiration
+			newInspiration.attributes.dailyLife = 1; // Daily life inspiration
 		}
 		else if (random == 2) {
-			newInspiration.community = 1; // Community inspiration
+			newInspiration.attributes.community = 1; // Community inspiration
 		}
 	}
 	else if (ss.envrionment == 'D') { // Downtown environment
 		if (random > 3) {
-			newInspiration.entertainment = 1; // Entertainment inspiration
+			newInspiration.attributes.entertainment = 1; // Entertainment inspiration
 		}
 		else if (random == 2) {
-			newInspiration.tech = 1; // Tech inspiration
+			newInspiration.attributes.tech = 1; // Tech inspiration
 		}
 	}
 	newInspiration.quality = computeQuality();
-	
+
 
 	// Create a new node with the generated inspiration
 	Node* newNode = createNode(newInspiration);
@@ -65,7 +66,7 @@ computeSale(double multiplier)
 {
 	int random = rand();
 	double sale;
-	random = random % 10 +1;
+	random = random % 10 + 1;
 	random = random + 15;
 	sale = random * multiplier;
 	return sale;
@@ -103,9 +104,9 @@ void insertInList(Node** pList, Inspiration newData)
 	}
 }
 
-void transferData(Node**pList1, Node** pList2, Node* pMem)
+void transferData(Node** pList1, Node** pList2, Node* pMem)
 {
-	Node* pCur = *pList1, *pCur2 = *pList2;
+	Node* pCur = *pList1, * pCur2 = *pList2;
 
 	if (pMem != NULL)
 	{
@@ -127,7 +128,7 @@ void transferData(Node**pList1, Node** pList2, Node* pMem)
 
 void deleteList(Node** pList)
 {
-	Node* pCur = *pList, *pPrev = NULL;
+	Node* pCur = *pList, * pPrev = NULL;
 
 	while (pCur->pNext != NULL)
 	{
@@ -164,11 +165,11 @@ double lookForGrouping(Node* pList)
 	int count = 0, maxCount = 0;
 	char* mostFrequentGroup = "";
 
-	for (int i = 0; i < size; i++) 
+	for (int i = 0; i < size; i++)
 	{
 		count = 0;
 
-		for (int j = 0; j < size; j++) 
+		for (int j = 0; j < size; j++)
 		{
 			if (pCur->pNext != NULL && strcmp(pCur->data.grouping, pCur->pNext->data.grouping) == 0)
 			{
@@ -176,7 +177,7 @@ double lookForGrouping(Node* pList)
 			}
 		}
 
-		if (count > maxCount) 
+		if (count > maxCount)
 		{
 			maxCount = count;
 			strcpy(mostFrequentGroup, pCur->data.grouping);
@@ -184,7 +185,7 @@ double lookForGrouping(Node* pList)
 
 		pCur = pCur->pNext;
 	}
-	
+
 	return groupingValue(mostFrequentGroup, maxCount, size) + qualityCalculate(pList);
 }
 
@@ -206,7 +207,7 @@ double groupingValue(char* grouping, int maxCount, int size)
 	else if (sizeValue == 2) sizeValue = 0.2;
 	else sizeValue = 0.3;
 
-	return sizeValue + group + countValue;	
+	return sizeValue + group + countValue;
 }
 
 double qualityCalculate(Node* pList)
@@ -273,7 +274,7 @@ void enviormentPicker()
 			printf("You see two big ferocious brown bears fighting for a cave to call home.\n");
 			printf("This ferocious ignited a spark within your heart"); // Plus inspo
 			break;
-		case 4: 
+		case 4:
 			printf("About an hour into the hike, you stumble upon a nice lake encapsulated in a field of serenity.\n");
 			printf("You feel extremely peacful and your heart is content\n");//Plus ethos
 			break;
