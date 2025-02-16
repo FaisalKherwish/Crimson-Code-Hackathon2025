@@ -58,11 +58,12 @@ Node* gatherInspiration(Attributes backPack[], Area ss) {
 }
 int computeQuality()
 {
-	int random = ran();
+	int random = rand();
 	random = random % 5 + 1;
 	return random;
 }
-computeSale(double multiplier)
+
+int computeSale(double multiplier)
 {
 	int random = rand();
 	double sale;
@@ -186,7 +187,7 @@ double lookForGrouping(Node* pList)
 		pCur = pCur->pNext;
 	}
 
-	return groupingValue(mostFrequentGroup, maxCount, size) + qualityCalculate(pList);
+	return groupingValue(mostFrequentGroup, maxCount, size) + qualityCalculate(pList) + 1;
 }
 
 double groupingValue(char* grouping, int maxCount, int size)
@@ -420,31 +421,8 @@ void game() {
 
 		// Gather inspiration based on environment
 		Node* inspiration = gatherInspiration(backPack, currentArea);
-		if (inspiration != NULL) {
-			// After gathering inspiration, calculate the value of the grouped inspirations
-			double groupValue = lookForGrouping(backPack);
+		
 
-			// Compute the quality of the inspiration gathered
-			double qualityValue = qualityCalculate(backPack);
-
-			// Add the grouped value and the quality value to the total earnings
-			totalEarnings += groupValue + qualityValue;
-
-			printf("Earnings after inspiration: %.2lf\n", totalEarnings);
-		}
-		else {
-			printf("No inspiration gathered today.\n");
-		}
-
-		// Ask player if they want to sell their art
-		char choice;
-		printf("Would you like to sell your art? (y/n): ");
-		scanf(" %c", &choice);
-		if (choice == 'y' || choice == 'Y') {
-			double salePrice = computeSale(1.0); // Here we assume multiplier is 1.0 for simplicity
-			totalEarnings += salePrice;
-			printf("You sold your art for %.2lf!\n", salePrice);
-		}
 
 		// End of day
 		printf("\n--- End of Day %d ---\n", day);
