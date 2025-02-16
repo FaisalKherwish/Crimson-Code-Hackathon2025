@@ -82,10 +82,7 @@ void printNode(Node* pCur)
 double lookForGrouping(Node* pList)
 {
 	Node* pCur = pList;
-
 	int size = 0;
-
-
 	while (pCur != NULL)
 	{
 		size++;
@@ -106,7 +103,8 @@ double lookForGrouping(Node* pList)
 			}
 		}
 
-		if (count > maxCount) {
+		if (count > maxCount) 
+		{
 			maxCount = count;
 			strcpy(mostFrequentGroup, pCur->data.grouping);
 		}
@@ -115,7 +113,6 @@ double lookForGrouping(Node* pList)
 	}
 	
 	return groupingValue(mostFrequentGroup, maxCount, size) + qualityCalculate(pList);
-	
 }
 
 double groupingValue(char* grouping, int maxCount, int size)
