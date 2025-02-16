@@ -61,6 +61,15 @@ int computeQuality()
 	random = random % 5 + 1;
 	return random;
 }
+computeSale(double multiplier)
+{
+	int random = rand();
+	double sale;
+	random = random % 10 +1;
+	random = random + 15;
+	sale = random * multiplier;
+	return sale;
+}
 Node* createNode(Inspiration newData)
 {
 	Node* pMem = malloc(sizeof(Node));
