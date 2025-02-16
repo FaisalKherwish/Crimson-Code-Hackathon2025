@@ -33,6 +33,7 @@ Node* createNode(Inspiration newData);
 void insertInList(Node** pList, Inspiration newData);
 void transferData(Node** pList, Node* pMem);
 void deleteList(Node** pList);
+void printNode(Node* pCur);
 double lookForGrouping(Node* pList);
 double groupingValue(char* grouping, int maxCount, int size);
 double qualityCalculate(Node* pList);
