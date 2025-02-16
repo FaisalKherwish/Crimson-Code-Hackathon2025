@@ -118,25 +118,35 @@ void insertInList(Node** pList, Inspiration newData)
 
 void transferData(Node** pList1, Node** pList2, Node* pMem)
 {
-	Node* pCur = *pList1, * pCur2 = *pList2;
-
 	if (pMem != NULL)
 	{
-		pCur->pPrev->pNext = pCur->pNext;
-		pCur->pNext->pPrev = pCur->pPrev;
+		// Unlink pMem from its current list (pList1)
+		if (pMem->pPrev != NULL) 
+		{
+			pMem->pPrev->pNext = pMem->pNext;
+		}
+		else 
+		{
+			// pMem was the head, update the head pointer.
+			*pList1 = pMem->pNext;
+		}
 
-		if (pCur2 == NULL)
+		if (pMem->pNext != NULL) 
 		{
-			*pList2 = pMem;
+			pMem->pNext->pPrev = pMem->pPrev;
 		}
-		else
+
+		// Insert pMem into the head of pList2
+		pMem->pNext = *pList2;
+		if (*pList2 != NULL) 
 		{
-			pMem->pNext = pCur;
-			pCur->pPrev = pMem;
-			*pList2 = pMem;
+			(*pList2)->pPrev = pMem;
 		}
+		pMem->pPrev = NULL;
+		*pList2 = pMem;
 	}
 }
+
 
 void deleteList(Node** pList)
 {
@@ -153,7 +163,7 @@ void deleteList(Node** pList)
 void printNode(Node* pCur)
 {
 	printf("Quality: %lf\n", pCur->data.quality);
-	printf("Type: %s", pCur->data.grouping);
+	printf("Type: %s\n", pCur->data.grouping);
 }
 
 double lookForGrouping(Node* pList)
@@ -423,23 +433,30 @@ void paint(Node** pList1, Node** pList2)
 	Node* pCur = *pList1;
 	int option = 0, size = 0;
 
+	if (pCur == NULL)
+	{
+		printf("Your mind draws a blank, you dont feel inspired to draw at all.\n");
+		system("pause");
+		return;
+	}
+
 	while (pCur != NULL)
 	{
-		printf("Inspiration: %d", size + 1);
+		printf("Inspiration: %d\n", size + 1);
 		printNode(pCur);
 		pCur = pCur->pNext;
 		size++;
 	}
 
 	do {
-		printf("Select inspiration you wish to paint onto the canvas (1-%d)\n", size + 1);
+		printf("Select inspiration you wish to paint onto the canvas (1-%d)\n", size);
 		printf("Selection must be valid\n");
 		scanf(" %d", &option);
-	} while (option > 1 && option < size + 1);
+	} while (option < 1 || option > size);
 	
 	pCur = *pList1;
 
-	for (int i = 0; i < option - 1; i++)
+	for (int i = 1; i < option; i++)
 	{
 		pCur = pCur->pNext;
 	}
@@ -468,6 +485,12 @@ int game()
 			printf("Day %d\n", day);
 			printf("Target Quota: %d\n", quota);
 			printf("Current Earnings: %.2lf\n", totalEarnings);
+
+			if (day == 1)
+			{
+				printf("Last day to gather money for rent.\nNo Pressure.\n");
+				printf("Piece your thoughts together and paint!\n");
+			}
 			printf("What do you do?\n");
 			printf("(1) Head Out\n(2) Paint and Sell\n(3) Quit\n");
 			scanf(" %d", &option);
@@ -509,10 +532,6 @@ int game()
 
 		} while (option != 3 && day > 0);
 
-		if (day == 1)
-		{
-			printf("Last day to gather money for rent.\nNo Pressure.");
-		}
 	}
 
 	
