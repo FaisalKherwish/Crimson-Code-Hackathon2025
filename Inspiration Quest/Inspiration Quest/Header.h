@@ -1,21 +1,22 @@
+#pragma once
 #ifndef INSPIRATION_H
 #define INSPIRATION_H
+
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 
 
 //computeSale(double multiplier);
-typedef struct artPiece {
+typedef struct artPiece 
+{
 	int value;
 } ArtPiece;
-typedef struct node
-{
-	ArtPiece data;
-	struct node* pNext;
-} Node;
 
-typedef struct area {
+typedef struct area 
+{
 	char envrionment; //forest
 	//char O;  //ourskirts
 	//char D;  //downtown
@@ -23,7 +24,8 @@ typedef struct area {
 } Area;
 
 
-typedef struct attributes {
+typedef struct attributes 
+{
 	int community;
 	int dailyLife;
 	int nature;
@@ -50,7 +52,7 @@ typedef struct node
 
 Node* createNode(Inspiration newData);
 void insertInList(Node** pList, Inspiration newData);
-void transferData(Node** pList, Node* pMem);
+void transferData(Node** pList1, Node** pList2, Node* pMem);
 void deleteList(Node** pList);
 void printNode(Node* pCur);
 double lookForGrouping(Node* pList);
